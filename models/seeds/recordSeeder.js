@@ -4,10 +4,11 @@ if (process.env.NODE_ENV !== "production") {
 const Record = require("../record");
 const User = require("../user");
 const db = require("../../config/mongoose");
+const recordList = require("../../record.json");
 
-db.on("error", () => {
-  console.log("mongodb error!");
-});
 db.once("open", () => {
-  console.log("mongodb connected!");
+  for (let i = 0; i < 10; i++) {
+    Record.create({ name: "name-" + i });
+  }
+  console.log("done");
 });
