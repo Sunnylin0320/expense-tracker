@@ -2,13 +2,12 @@ if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
 }
 const Record = require("../record");
-const User = require("../user");
 const db = require("../../config/mongoose");
-const recordList = require("../../record.json");
+const recordList = require("../../data/record.json");
 
 db.once("open", () => {
-  for (let i = 0; i < 10; i++) {
-    Record.create({ name: "name-" + i });
-  }
+  recordList.records.forEach(record => {
+    Record.create(record)
+  })
   console.log("done");
 });

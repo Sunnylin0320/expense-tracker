@@ -2,7 +2,7 @@ if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
 }
 const Category = require("../category");
-const categoryList = require("../../category.json");
+const categoryList = require("../category.json");
 const User = require("../user");
 const db = require("../../config/mongoose");
 
