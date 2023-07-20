@@ -1,5 +1,5 @@
 <h2>請修改支出</h2>
-<form action="/records/{{record._id}}/edit" method="POST">
+<form action="/records/{{record._id}}?_method=PUT" method="POST">
  <label for="name">名稱：</label>
   <input name="name" id="name" type="text" required>
   <label for="date">日期：</label>
