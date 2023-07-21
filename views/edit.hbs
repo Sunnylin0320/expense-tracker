@@ -1,19 +1,32 @@
-<h2>請修改支出</h2>
-<form action="/records/{{record._id}}?_method=PUT" method="POST">
- <label for="name">名稱：</label>
-  <input name="name" id="name" type="text" required>
-  <label for="date">日期：</label>
-  <input name="date" id="date" type="date" placeholder="2023/xx/xx"required>
-  <label for="category">類別：</label>
-  <input list="categorys" class="form-control" name="category" id="category">
-  <datalist id="categorys">
-    <option>家居物業</option>
-    <option>交通出行</option>
-    <option>休閒娛樂</option>
-    <option>餐飲食品</option>
-    <option>其他</option>
-  </datalist>
-  <label for="amount">金額：</label>
-  <input name="amount" id="amount" type="number" min="0" required>
-  <button type="submit">送出</button>
-</form>
+<div class="container mt-5">
+    <h2>請修改支出</h2>
+    <form action="/records/{{record._id}}?_method=PUT" method="POST">
+      <div class="mb-3">
+        <label for="name" class="form-label">名稱：</label>
+        <input name="name" id="name" type="text" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <label for="date" class="form-label">日期：</label>
+        <input name="date" id="date" type="date" class="form-control" placeholder="2023/xx/xx" required>
+      </div>
+      <div class="mb-3">
+        <label for="category" class="form-label">類別：</label>
+        <input list="categorys" class="form-control" name="category" id="category">
+        <datalist id="categorys">
+          <option>家居物業</option>
+          <option>交通出行</option>
+          <option>休閒娛樂</option>
+          <option>餐飲食品</option>
+          <option>其他</option>
+        </datalist>
+         </div>
+      <div class="mb-3">
+        <label for="amount" class="form-label">金額：</label>
+        <input name="amount" id="amount" type="number" min="0" class="form-control" required>
+      </div>
+      <div class="d-flex justify-content-center mt-3">
+        <a href="/" class="btn btn-primary mr-3" style="color: orange">返回</a>
+        <button type="submit" class="btn btn-info" style="color: orange;">儲存送出</button>
+      </div>
+    </form>
+  </div>
