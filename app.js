@@ -8,6 +8,7 @@ const exphbs = require("express-handlebars");
 const app = express();
 const session = require("express-session");
 const routes = require("./routes");
+const usePassport = require("./config/passport");
 const bodyParser = require("body-parser");
 const methodOverride = require("method-override"); 
 
@@ -24,6 +25,7 @@ app.use(
 );
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
+usePassport(app);
 app.use(routes);
 
 
