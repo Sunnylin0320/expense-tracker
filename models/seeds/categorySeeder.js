@@ -2,13 +2,19 @@ if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
 }
 const Category = require("../category");
-const categoryList = require("../category.json");
-const User = require("../user");
+const categoryList = require("../../data/category.json");
 const db = require("../../config/mongoose");
 
-db.on("error", () => {
-  console.log("mongodb error!");
-});
 db.once("open", () => {
-  console.log("mongodb connected!");
+  Promise.all(
+    categoryList.map((categoryList) => {
+      return Category.create({
+        name: categoryList.name,
+        icon: categoryList.icon,
+      });
+    })
+  ).then(() => {
+    console.log("categoryList done");
+    process.exit();
+  });
 });

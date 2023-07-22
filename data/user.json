@@ -2,11 +2,13 @@
   {
     "name": "廣志",
     "email": "user1@example.com",
-    "password": "123"
+    "password": "123",
+     "item": [0]
   },
   {
     "name": "小新",
     "email": "user2@example.com",
-    "password": "456"
+    "password": "456",
+    "item": [1]
   }
 ]

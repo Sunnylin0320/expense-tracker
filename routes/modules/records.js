@@ -1,48 +1,74 @@
 const express = require("express");
 const router = express.Router();
 const Record = require("../../models/record");
+const Category = require("../../models/category");
 
-
-
+//new樣板路由
 router.get("/new", (req, res) => {
   return res.render("new");
 });
 
 
 
-
-// set create record route- post created data
-router.post("/records", (req, res) => {
-  return Record.create(req.body)
+router.post("/", async (req, res) => {
+  const userId = req.user._id;
+  const { name, date, category, amount } = req.body;
+  const categoryData = await Category.findOne({ name: category })
+    .lean()
+    .catch((error) => console.log(error));
+  return Record.create({
+    name,
+    date,
+    category,
+    amount,
+    userId,
+    categoryId: categoryData._id,
+  })
     .then(() => res.redirect("/"))
     .catch((error) => console.log(error));
 });
 
 router.get("/:id/edit", (req, res) => {
-  const id = req.params.id;
-  return Record.findById(id)
+  const userId = req.user._id;
+  const _id = req.params.id;
+  return Record.findById({ _id, userId })
     .lean()
     .then((record) => res.render("edit", { record }))
     .catch((error) => console.log(error));
 });
 
 
-router.put("/:id", (req, res) => {
-  const id = req.params.id;
-  return Record.findById(id)
-    .then((record) => {
-      record.name = name;
-      return record.save();
-    })
-    .then(() => res.redirect("/"))
+
+router.put("/:id", async (req, res) => {
+  const userId = req.user._id;
+  const _id = req.params.id;
+  const { name, date, category, amount } = req.body;
+  const categoryData = await Category.findOne({ name: category })
+    .lean()
     .catch((error) => console.log(error));
+  return (
+    Record.findOneAndUpdate(
+      { _id, userId },
+      { name, date, category, amount, userId, categoryId: categoryData._id },
+      {
+        new: true,
+      }
+    )
+      // .then(record => {
+      //   record = Object.assign(record, { name, date, category, amount, userId, categoryId: categoryData._id })
+      //   return record.save()
+      // })
+      .then(() => res.redirect("/"))
+      .catch((error) => console.log(error))
+  );
 });
 
 
 
 router.delete("/:id", (req, res) => {
-  const id = req.params.id;
-  return Record.findById(id)
+  const userId = req.user._id;
+  const _id = req.params.id;
+  return Record.findByIdAndDelete({ _id, userId })
     .then((record) => record.remove())
     .then(() => res.redirect("/"))
     .catch((error) => console.log(error));
