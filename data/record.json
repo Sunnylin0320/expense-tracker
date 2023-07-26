@@ -1,16 +1,39 @@
 {
-  "records":[
+  "results":[
     {
+      "id": 1,
       "name": "晚餐",
       "category": "餐飲食品",
       "date": "2023-07-19",
       "amount": "300"
     },
     {
+      "id": 2,
       "name": "玩具",
       "category": "休閒娛樂",
       "date": "2023-07-18",
-      "amount": "20"
+      "amount": 20
+    },
+    {
+      "id": 3,
+      "name": "高鐵",
+      "category": "交通出行",
+      "date": "2023-07-20",
+      "amount": 1500
+    },
+    {
+      "id": 4,
+      "name": "房租",
+      "category": "家居物業",
+      "date": "2023-07-22",
+      "amount": 20000
+    },
+    {
+      "id": 5,
+      "name": "空氣清淨機",
+      "category": "其他",
+      "date": "2023-07-23",
+      "amount": 9999
     }
   ]
 }

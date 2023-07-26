@@ -53,20 +53,20 @@ router.post("/register", (req, res) => {
           password,
           confirmPassword,
         });
-         }
+         } else {
       return bcrypt
         .genSalt(10) // 產生「鹽」，並設定複雜係數為 10
         .then(salt => bcrypt.hash(password, salt)) // 為使用者加鹽，產生雜湊值
         .then(hash => User.create({
-
-    
           name,
           email,
           password: hash
+      
         }))
         .then(() => res.redirect('/'))
         .catch(err => console.log(err)) 
-    })
+      }
+    }) 
     .catch((err) => console.log(err));
 });
 

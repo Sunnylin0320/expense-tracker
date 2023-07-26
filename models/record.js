@@ -1,29 +1,34 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+
 const recordSchema = new Schema({
   name: {
-    type: String, // 資料型別是字串
-    required: true, // 這是個必填欄位
-  },
-  category: {
     type: String,
-    enum: ["家居物業", "交通出行", "休閒娛樂", "餐飲食品", "其他"],
     required: true,
   },
   date: {
-    type: Date,
+    type: String,
     required: true,
   },
   amount: {
     type: Number,
-    min: 0,
     required: true,
   },
-  userId: { 
+  userId: {
     type: Schema.Types.ObjectId,
-    ref: 'User',
+    ref: "User",
     index: true,
-    require: true,
-   }
+    required: true,
+  },
+  categoryId: {
+    type: Schema.Types.ObjectId,
+    ref: "Category",
+    required: true,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
 });
+
 module.exports = mongoose.model("Record", recordSchema);

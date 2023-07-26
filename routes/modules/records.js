@@ -8,8 +8,6 @@ router.get("/new", (req, res) => {
   return res.render("new");
 });
 
-
-
 router.post("/", async (req, res) => {
   const userId = req.user._id;
   const { name, date, category, amount } = req.body;
@@ -28,6 +26,8 @@ router.post("/", async (req, res) => {
     .catch((error) => console.log(error));
 });
 
+
+
 router.get("/:id/edit", (req, res) => {
   const userId = req.user._id;
   const _id = req.params.id;
@@ -36,7 +36,6 @@ router.get("/:id/edit", (req, res) => {
     .then((record) => res.render("edit", { record }))
     .catch((error) => console.log(error));
 });
-
 
 
 router.put("/:id", async (req, res) => {
@@ -54,10 +53,6 @@ router.put("/:id", async (req, res) => {
         new: true,
       }
     )
-      // .then(record => {
-      //   record = Object.assign(record, { name, date, category, amount, userId, categoryId: categoryData._id })
-      //   return record.save()
-      // })
       .then(() => res.redirect("/"))
       .catch((error) => console.log(error))
   );
