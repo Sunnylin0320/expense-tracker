@@ -1,36 +1,50 @@
+<div class="d-flex flex-column align-items-center mt-5">
+  {{!-- 排序方式 --}}
+  <form action="/records/filter" method="GET">
+    <label for="category" class="form-label mt-4">請選擇類別</label>
+    <select name="category" id="category" class="form-select" onchange="submit()">
+      <option value="" selected>所有分類</option>
+      {{#each categories}}
+      <option value="{{this.name}}" selected>{{this.name}}
+      </option>
+      {{/each}}
+    </select>
 
-<div class="row">
-    <div class="col-md-8">      
+  </form>
+  {{!-- amount --}}
+  <div class="row">
+    <div class="total-amount d-flex flex-column align-items-center m-5">
+      <h2 style="text-align: center">總金額:${{totalAmount}} 元</h2>
     </div>
-    <div class="col-md-4">
-    </div>
+  </div>
+  {{!-- records --}}
+  <ul class="record-list list-group list-group-light" style="width: 700px">
+    {{#each records}}
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      <div class="d-flex align-items-center">
+        <h2 class="record-category-icon"><i class="{{ this.category}}"></i></h2>
+        <div class="ms-3">
+          <h4 class="record-name fw-bold mb-1">{{ this.name }}</h4>
+          <h5 class="record-name fw-bold mb-1">${{ this.amount }}</h5>
+          <p class="record-date text-muted mb-0">{{ this.date }}{{this.day}}</p>
+        </div>
+      </div>
+
+      <div class="column">
+        <a href="./records/{{ this._id }}/edit" class="btn  btn-primary btn-sm mt-5" style="display: inline-block;">修改</a>
+        <form action="./records/{{ this._id }}?_method=DELETE" method="POST" style="display: inline;">
+          <button type="submit" class="btn  btn-secondary btn-sm mt-5">刪除</button>
+        </form>
+      </div>
+
+    </li>
+    {{/each}}
+
+  </ul>
+  <div class="add-btn mb-5">
+    <a href="/records/new" class="btn btn-primary mt-5">
+      <i class="fa-solid fa-circle-plus me-2"></i>
+      新增支出
+    </a>
   </div>
 </div>
-<table class="records-index">
-  {{#each records}}
-  <tr>
-    <td>
-      {{this.category}}
-    </td>
-    <td>
-      {{this.name}}
-    </td>
-    <td>
-      {{this.date}}
-    </td>
-    <td>
-      {{this.amount}}
-      <a href="/records/{{ this._id }}/edit">修改</a>
-    </td>
-    <td>
-      <form action="/records/{{ this._id }}?_method=DELETE" method="POST" style="display: inline;">
-        <button type="submit">刪除</button>
-      </form>
-    </td>
-  
-  </tr>
-  {{/each}}
-</table>
-<a href="/records/new" class="btn btn-add mt-3 mb-5">新增消費</a>
-
-  </div>
