@@ -1,16 +1,19 @@
 <div class="d-flex flex-column align-items-center mt-5">
   {{!-- 排序方式 --}}
-  <form action="/records/filter" method="GET">
-    <label for="category" class="form-label mt-4">請選擇類別</label>
-    <select name="category" id="category" class="form-select" onchange="submit()">
+  <form action="/" method="GET">
+    <label for="category">請選擇類別</label>
+    <select name="category" id="category" class="mr-5 ml-3" onchange="submit()">
       <option value="" selected>所有分類</option>
       {{#each categories}}
       <option value="{{this.name}}" selected>{{this.name}}
       </option>
       {{/each}}
     </select>
-
   </form>
+
+
+
+
   {{!-- amount --}}
   <div class="row">
     <div class="total-amount d-flex flex-column align-items-center m-5">
@@ -22,11 +25,11 @@
     {{#each records}}
     <li class="list-group-item d-flex justify-content-between align-items-center">
       <div class="d-flex align-items-center">
-        <h2 class="record-category-icon"><i class="{{ this.category}}"></i></h2>
+        <h2 class="record-category-icon"><i class="{{ this.category }}"></i></h2>
         <div class="ms-3">
           <h4 class="record-name fw-bold mb-1">{{ this.name }}</h4>
           <h5 class="record-name fw-bold mb-1">${{ this.amount }}</h5>
-          <p class="record-date text-muted mb-0">{{ this.date }}{{this.day}}</p>
+          <p class="record-date text-muted mb-0">{{ this.date }}</p>
         </div>
       </div>
 
