@@ -5,11 +5,10 @@
     <select name="category" id="category" class="mr-5 ml-3" onchange="submit()">
       <option value="" selected>所有分類</option>
       {{#each categories}}
-      <option value="{{this.name}}" selected>{{this.name}}
-      </option>
+      <option value="{{this.name}}">{{this.name}}</option>
       {{/each}}
     </select>
-  </form>
+</form>
 
 
 

@@ -11,14 +11,14 @@
       </div>
       <div class="mb-3">
         <label for="category" class="form-label">類別：</label>
-        <input list="categorys" class="form-control" name="category" id="category" value="{{ record.category }}" >
-        <datalist id="categorys">
-          <option>家居物業</option>
-          <option>交通出行</option>
-          <option>休閒娛樂</option>
-          <option>餐飲食品</option>
-          <option>其他</option>
-        </datalist>
+        <select name="category" id="category" class="form-control" required>
+          <option selected hidden value='{{record.category}}'>{{record.category}}</option>
+          <option value="家居物業">家居物業</option>
+          <option value="交通出行">交通出行</option>
+          <option value="休閒娛樂">休閒娛樂</option>
+          <option value="餐飲食品">餐飲食品</option>
+          <option value="其他">其他</option>
+        </select>
          </div>
       <div class="mb-3">
         <label for="amount" class="form-label">金額：</label>
