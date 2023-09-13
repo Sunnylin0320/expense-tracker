@@ -4,6 +4,7 @@ if (process.env.NODE_ENV !== "production") {
 }
 const Record = require("../record");
 const User = require("../user");
+const Category = require("../category"); // 引入類別模型
 const recordList = require("../../data/record.json");
 const db = require("../../config/mongoose");
 
@@ -27,15 +28,24 @@ db.once("open", () => {
     .then((user) => {
       const userId = user._id;
       return Promise.all(
-        Array.from({ length: recordList.length }, (_, i) =>
-          Record.create({
-            name: recordList[i].name,
-            category: recordList[i].category,
-            date: recordList[i].date,
-            amount: recordList[i].amount,
-            userId,
-          })
-        )
+        recordList.map((recordItem) => {
+          // 先查找對應的類別
+          return Category.findOne({ name: recordItem.category }).then(
+            (category) => {
+              if (!category) {
+                throw new Error(`找不到類別: ${recordItem.category}`);
+              }
+              return Record.create({
+                name: recordItem.name,
+                category: category.name,
+                categoryId: category._id, // 使用 categoryId 來建立關聯
+                date: recordItem.date,
+                amount: recordItem.amount,
+                userId,
+              });
+            }
+          );
+        })
       );
     })
     .then(() => {
