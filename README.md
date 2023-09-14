@@ -69,8 +69,8 @@ npm install
   npm run seed
   ```
   ```
-  帳號:user1@example.com   user2@example.com
-  密碼:123                 123
+  帳號:root@example.com   
+  密碼:12345678                
   ```
 6. 啟動伺服器，執行 app.js 檔案
 
