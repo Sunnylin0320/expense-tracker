@@ -1,39 +1,39 @@
-const bcrypt = require("bcryptjs");
-if (process.env.NODE_ENV !== "production") {
-  require("dotenv").config();
+const bcrypt = require('bcryptjs')
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
 }
-const Record = require("../record");
-const User = require("../user");
-const Category = require("../category"); // 引入類別模型
-const recordList = require("../../data/record.json");
-const db = require("../../config/mongoose");
+const Record = require('../record')
+const User = require('../user')
+const Category = require('../category') // 引入類別模型
+const recordList = require('../../data/record.json')
+const db = require('../../config/mongoose')
 
 const SEED_USER = {
-  name: "root",
-  email: "root@example.com",
-  password: "12345678",
-};
+  name: 'root',
+  email: 'root@example.com',
+  password: '12345678'
+}
 
-db.once("open", () => {
+db.once('open', () => {
   bcrypt
     .genSalt(10)
-    .then((salt) => bcrypt.hash(SEED_USER.password, salt))
-    .then((hash) =>
+    .then(salt => bcrypt.hash(SEED_USER.password, salt))
+    .then(hash =>
       User.create({
         name: SEED_USER.name,
         email: SEED_USER.email,
-        password: hash,
+        password: hash
       })
     )
-    .then((user) => {
-      const userId = user._id;
+    .then(user => {
+      const userId = user._id
       return Promise.all(
-        recordList.map((recordItem) => {
+        recordList.map(recordItem => {
           // 先查找對應的類別
           return Category.findOne({ name: recordItem.category }).then(
-            (category) => {
+            category => {
               if (!category) {
-                throw new Error(`找不到類別: ${recordItem.category}`);
+                throw new Error(`找不到類別: ${recordItem.category}`)
               }
               return Record.create({
                 name: recordItem.name,
@@ -41,16 +41,16 @@ db.once("open", () => {
                 categoryId: category._id, // 使用 categoryId 來建立關聯
                 date: recordItem.date,
                 amount: recordItem.amount,
-                userId,
-              });
+                userId
+              })
             }
-          );
+          )
         })
-      );
+      )
     })
     .then(() => {
-      console.log("done!");
-      process.exit();
+      console.log('done!')
+      process.exit()
     })
-    .catch((err) => console.error(err));
-});
+    .catch(err => console.error(err))
+})
