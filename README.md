@@ -1,5 +1,5 @@
 # 記帳網站 expense-tracker
-
+![Index page for expense-tracker](expense-tracker.png)
 ## 介紹
 這是一個簡單的記帳網站，旨在幫助使用者記錄和管理他的支出。
 
@@ -68,10 +68,10 @@ npm install
   ```
   npm run seed
   ```
-  ```
-  帳號:root@example.com   
-  密碼:12345678                
-  ```
+| User | Email             | Password |
+| :---:| :---------------: | :------: |
+| root | root@example.com | 12345678 |        
+
 6. 啟動伺服器，執行 app.js 檔案
 
 ```
